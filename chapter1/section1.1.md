@@ -1,11 +1,11 @@
 # Section1.1
 ##Drive
 
-- **Returns a list of drives for the current user.返回当前用户有权限的驱动列表**
+* **Returns a list of drives for the current user.返回当前用户有权限的驱动列表**
 
-	GET `http://{domain_name}/{rest_context_name}/private/wcmDriver/getDrivers/`
+GET `http://{domain_name}/{rest_context_name}/private/wcmDriver/getDrivers/`
 
-	参数：
+参数：
 
 param | description | required
 ------------ | ------------- | ------------
