@@ -118,3 +118,82 @@ http://localhost:8080/rest/private/wcmDriver/uploadFile/checkExistence?language=
     <?xml version="1.0" encoding="UTF-8"?>
     <NotExisted/>
 
+---
+
+* ** upload a file 上传文件 **
+
+POST `http://{domain_name}/{rest_context_name}/private/wcmDriver/uploadFile/upload/`
+
+参数：
+
+ param | description | required
+------------ | ------------- | ------------
+uploadId | The Id of the uploaded file.  | true
+
+---
+
+* ** Controls the process of uploading a file **
+
+GET `http://{domain_name}/{rest_context_name}/private/wcmDriver/uploadFile/control/` 
+
+参数：
+
+ param | description | required
+------------ | ------------- | ------------
+repositoryName |  The repository name. | true
+workspaceName |  The workspace name. | true
+driverName |  The driver name. | true
+currentFolder |  The current folder. | true
+currentPortal |  The current portal. | true
+userId | The user identity. | false
+jcrPath | the path of the file | false
+action | the action | false
+language | the language | false
+fileName | the file name | false
+uploadId | the id of upload | true
+existenceAction | checks if an action exists or not | false
+
+
+示例：
+查看上传状态：
+`http://localhost:8080/portal/rest/wcmDriver/uploadFile/control?repositoryName=repository&workspaceName=collaboration&driverName=.spaces.space0&currentFolder=/folder1&currentPortal=intranet&userId=root&action=progress&uploadId=1553259954503714`
+
+上传新的版本：
+`http://localhost:8080/portal/rest/wcmDriver/uploadFile/control?repositoryName=repository&workspaceName=collaboration&driverName=.spaces.space0&currentFolder=/folder1&currentPortal=intranet&userId=root&uploadId=488953287235556&fileName=8718367adab44aedc0a4903cb51c8701a08bfb04.jpg&language=en&existenceAction=createVersion&action=save`
+
+
+上传文件流程：
+
+1. 先检查是否存在（/wcmDriver/uploadFile/checkExistence/）
+2. 检查是否可以上传文件（/wcmDriver/uploadFile/checkUploadAvailable/）
+3. 用uploadid去查上传状态，如果percent=0,则未上传（/wcmDriver/uploadFile/control/   **action=progress**）
+4. 上传（/wcmDriver/uploadFile/upload   通过表单上传）
+5. 真正的上传（/wcmDriver/uploadFile/control/  **action=save**）  **注意：这时候才是真正去上传文件**
+
+---
+
+* **Clean file name 去除文件名乱码**
+
+GET `http://{domain_name}/{rest_context_name}/private/wcmDriver/uploadFile/cleanName`
+
+参数：
+
+ param | description | required
+------------ | ------------- | ------------
+fileName |  original file name. | true
+
+示例：
+
+`http://localhost:8080/rest/private/wcmDriver/uploadFile/cleanName?fileName=Cg-4V1GH田飞I2eIRDh6AAVUy4aA1VMAAIRaQNmg2IABVTj855.jpg`
+
+结果样例：
+
+    <name>
+        Cg-4V1GH tian feiI2eIRDh6AAVUy4aA1VMAAIRaQNmg2IABVTj855.jpg
+    </name>
+    
+---
+* **return to brower a stream got from jcr:content/jcr:data for downloading the content of the node.**
+`http://localhost:8080/rest/private/contents/download/collaboration/Groups/spaces/space0/Documents/folder1/4b90f603738da977c76fb500b351f8198618e35d.jpg?version=2`
+
+
