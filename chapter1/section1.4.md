@@ -6,3 +6,6 @@ http://localhost:8080/portal/{rest_context_name}/jcr/{repositoryName}/{collabora
 
 样例：
 http://localhost:8080/portal/rest/jcr/repository/collaboration/Groups/spaces/space0/Documents/folder1/4b90f603738da977c76fb500b351f8198618e35d.jpg?version=1
+
+获取tags
+http://localhost:8080/rest/private/contents/tag/public?jcrPath=/repository/collaboration/Groups/spaces/space0/Documents/folder1/1+(3).py

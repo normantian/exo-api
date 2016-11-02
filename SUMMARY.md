@@ -12,3 +12,4 @@
  * [Unified Search](chapter2/section2.1.md)
 * [Social Resources](chapter2/README.md)
 * [Section2.1](chapter2/section2.1.md)
+* [Develop](chapter3/section3.1.md)

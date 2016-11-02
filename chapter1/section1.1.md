@@ -172,7 +172,7 @@ existenceAction | checks if an action exists or not | false
 
 ---
 
-* **Clean file name 去除文件名乱码**
+* **Clean file name 去除文件名乱码,中文文明**
 
 GET `http://{domain_name}/{rest_context_name}/private/wcmDriver/uploadFile/cleanName`
 
@@ -192,6 +192,27 @@ fileName |  original file name. | true
         Cg-4V1GH tian feiI2eIRDh6AAVUy4aA1VMAAIRaQNmg2IABVTj855.jpg
     </name>
     
+---
+
+* **create new folder 创建文件夹**
+GET `http://{domain_name}/{rest_context_name}/private/managedocument/createFolder/`
+
+参数：
+
+ param | description | required
+------------ | ------------- | ------------
+workspaceName |  The workspace name. | true
+driverName |  The drive name. | true
+currentFolder | The path to the folder where a child folder is added. | true
+folderName | The folder name. | true
+
+示例：
+`http://127.0.0.1:8080/rest/private/managedocument/createFolder?workspaceName=collaboration&driveName=.hana&currentFolder=sz100009&folderName=img`
+
+结果样例:
+
+    <Folder canAddChild="true" canRemove="true" currentFolder="sz100009/img" driveName=".hana" hasChild="false" name="img" nodeType="nt:unstructured" path="/Groups/hana/Documents/sz100009/img" title="img" titlePath="sz100009/img" workspaceName="collaboration"/>
+
 ---
 * **return to brower a stream got from jcr:content/jcr:data for downloading the content of the node.**
 `http://localhost:8080/rest/private/contents/download/collaboration/Groups/spaces/space0/Documents/folder1/4b90f603738da977c76fb500b351f8198618e35d.jpg?version=2`
